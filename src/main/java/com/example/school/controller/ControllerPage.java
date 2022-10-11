@@ -1,16 +1,16 @@
 package com.example.school.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ControllerPage {
-
-    @RequestMapping(value={"","/","/home"})
-    public String welcomePage(){
+    @RequestMapping(value={"", "/", "home"})
+    public String displayWelcomePage(Model model) {
+        model.addAttribute("username", "Phoenix");
         return "Welcome.html";
     }
-
     @RequestMapping("/index")
     public String displayIndexPage() {
         return "Index.html";
@@ -20,5 +20,4 @@ public class ControllerPage {
     public String displayLoginPage(){
         return "Login.html";
     }
-
 }
