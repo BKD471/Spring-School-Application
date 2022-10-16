@@ -2,15 +2,15 @@ package com.example.school.controller;
 
 import com.example.school.model.Contact;
 import com.example.school.service.ContactService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.logging.Logger;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+
+@Slf4j
 @Controller
 public class ContactController {
 
@@ -47,5 +47,7 @@ public class ContactController {
         //we want to club model data and view information...when we want to send data to ui along with view name
         return new ModelAndView("redirect:/contact");
     }
+
+
 
 }
