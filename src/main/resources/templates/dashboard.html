@@ -37,7 +37,7 @@ Author URL: http://w3layouts.com
 </section>
 <!-- //inner banner -->
 
-<!-- login block -->
+<!-- welcome block -->
 <section class="w3l-contact py-5" id="contact">
   <div class="container py-md-5 py-4">
     <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
@@ -47,7 +47,32 @@ Author URL: http://w3layouts.com
 
   </div>
 </section>
-<!-- //login block -->
+<!-- //welcome block -->
+
+<div class="container py-md-5 py-4">
+  <div class="section__content section__content--p30">
+    <div class="container-fluid">
+      <div class="row m-t-25">
+        <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
+          <a th:href="@{/displayMessages}">
+            <div class="overview-item overview-item--c3">
+              <div class="overview__inner">
+                <div class="overview-box clearfix">
+                  <div class="icon">
+                    <i class="fas fa-envelope-open-text"></i>
+                  </div>
+                  <div class="text">
+                    <h2>Messages</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- footer block -->
 <div th:replace="footer :: footer">...</div>
