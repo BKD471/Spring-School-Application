@@ -1,6 +1,5 @@
 package com.example.school.repository;
 
-import com.example.school.constants.SchoolConstants;
 import com.example.school.model.Contact;
 import com.example.school.rowmapper.ContactRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;

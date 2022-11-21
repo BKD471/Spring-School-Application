@@ -2,18 +2,25 @@ package com.example.school.model;
 
 import lombok.*;
 
+import javax.persistence.*;
+
 //@Getter
 //@Setter
 //@AllArgsConstructor
 @Data
-public class HoliDay  extends BaseEntity{
+@Entity
+@Table(name = "holidays")
+public class HoliDay extends BaseEntity {
 
-    private  String day;
-    private  String reason;
-    private  Type type;
+    @Id
+    private String day;
+    private String reason;
 
-    public enum Type{
-        FESTIVAL,FEDERAL
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
+    public enum Type {
+        FESTIVAL, FEDERAL
     }
 
 

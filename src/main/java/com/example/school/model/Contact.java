@@ -1,7 +1,10 @@
 package com.example.school.model;
 
 import lombok.Data;
+import lombok.Generated;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -11,9 +14,14 @@ import javax.validation.constraints.Size;
 //@Setter
 //@ToString
 @Data
+@Entity
+@Table(name="contact_msg")
 public class Contact extends BaseEntity{
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
+    @GenericGenerator(name="native",strategy = "native")
+    @Column(name="contact_id")
     private int contactId;
 
     @NotBlank(message="Name must not be blank")

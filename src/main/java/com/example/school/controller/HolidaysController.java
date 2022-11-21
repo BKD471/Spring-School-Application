@@ -2,6 +2,7 @@ package com.example.school.controller;
 
 import com.example.school.model.HoliDay;
 import com.example.school.repository.HolidaysRepository;
+import com.example.school.repository.HolidaysRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Controller
 public class HolidaysController {
 
     @Autowired
-    HolidaysRepository holidaysRepository;
+    HolidaysRepositoryJPA holidaysRepositoryJpa;
     @GetMapping("/holidays/{display}")
     public String displayHolidays(@PathVariable String display, Model model) {
         if (display != null && display.equalsIgnoreCase("federal")) {
@@ -28,11 +30,13 @@ public class HolidaysController {
             model.addAttribute("federal", true);
             model.addAttribute("festival", true);
         }
-        List<HoliDay> holidays = holidaysRepository.findAllHolidays();
+//        List<HoliDay> holidays = holidaysRepository.findAllHolidays();
+        Iterable<HoliDay> holidays = holidaysRepositoryJpa.findAll();
+        List<HoliDay> holidayList= StreamSupport.stream(holidays.spliterator(),false).collect(Collectors.toList());
         HoliDay.Type[] types = HoliDay.Type.values();
         for (HoliDay.Type type : types) {
             model.addAttribute(type.toString(),
-                    (holidays.stream().filter(holiday -> holiday.getType().equals(type)).collect(Collectors.toList())));
+                    (holidayList.stream().filter(holiday -> holiday.getType().equals(type)).collect(Collectors.toList())));
         }
         return "holidays.html";
     }
