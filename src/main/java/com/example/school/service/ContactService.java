@@ -23,8 +23,8 @@ public class ContactService {
     public boolean saveMessageDetails(Contact contact){
          boolean isSaved=false;
          contact.setStatus(SchoolConstants.OPEN);
-         contact.setCreatedBy(SchoolConstants.ANONYMOUS);
-         contact.setCreatedAt(LocalDateTime.now());
+         //contact.setCreatedBy(SchoolConstants.ANONYMOUS);
+         //contact.setCreatedAt(LocalDateTime.now());
          Contact savedContact=contactRepositoryJpa.save(contact);
          if(!Objects.isNull(savedContact) && savedContact.getContactId()>0) isSaved=true;
          return isSaved;
@@ -40,8 +40,8 @@ public class ContactService {
         Optional<Contact> fetchContact=contactRepositoryJpa.findById(contactId);
         fetchContact.ifPresent(c1->{
             c1.setStatus(SchoolConstants.CLOSE);
-            c1.setUpdatedBy(updatedBy);
-            c1.setUpdatedAt(LocalDateTime.now());
+            //c1.setUpdatedBy(updatedBy);
+            //c1.setUpdatedAt(LocalDateTime.now());
         });
         Contact updatedContact=contactRepositoryJpa.save(fetchContact.get());
         if(!Objects.isNull(updatedContact) && !Objects.isNull(updatedContact.getUpdatedBy())) isUpdated=true;
