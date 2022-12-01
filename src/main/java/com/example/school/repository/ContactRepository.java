@@ -16,26 +16,19 @@ import java.util.List;
 
 @Repository
 public class ContactRepository {
-
     private final JdbcTemplate jdbcTemplate;
-
     @Autowired
     public ContactRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
     public int saveContactMessage(Contact contact) {
         String sql = "INSERT INTO contact_msg (name,mobile_num,email,subject,message,status," + "created_at,created_by) VALUES(?,?,?,?,?,?,?,?)";
-
         return jdbcTemplate.update(sql,contact.getName(),contact.getMobileNum(),contact.getEmail(),contact.getSubject(),
                 contact.getMessage(),contact.getStatus(),contact.getCreatedAt(),contact.getCreatedBy());
     }
 
-
     public List<Contact> findMsgsWithStatus(String status){
-
       String sql="SELECT * FROM contact_msg WHERE status=?";
-
       return jdbcTemplate.query(sql, new PreparedStatementSetter() {
           @Override
           public void setValues(PreparedStatement ps) throws SQLException {
