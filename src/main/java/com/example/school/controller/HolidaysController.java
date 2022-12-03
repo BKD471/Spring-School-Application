@@ -1,7 +1,6 @@
 package com.example.school.controller;
 
 import com.example.school.model.HoliDay;
-import com.example.school.repository.HolidaysRepository;
 import com.example.school.repository.HolidaysRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -30,7 +28,6 @@ public class HolidaysController {
             model.addAttribute("federal", true);
             model.addAttribute("festival", true);
         }
-//        List<HoliDay> holidays = holidaysRepository.findAllHolidays();
         Iterable<HoliDay> holidays = holidaysRepositoryJpa.findAll();
         List<HoliDay> holidayList= StreamSupport.stream(holidays.spliterator(),false).collect(Collectors.toList());
         HoliDay.Type[] types = HoliDay.Type.values();

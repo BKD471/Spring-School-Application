@@ -1,7 +1,6 @@
 package com.example.school.model;
 
 import lombok.Data;
-import lombok.Generated;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,9 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-//@Getter
-//@Setter
-//@ToString
 @Data
 @Entity
 @Table(name="contact_msg")

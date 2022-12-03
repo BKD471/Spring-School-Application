@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @SpringBootApplication
 @EnableJpaRepositories("com.example.school.repository")
 @EntityScan("com.example.school.model")

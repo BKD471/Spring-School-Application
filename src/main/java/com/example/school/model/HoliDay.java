@@ -4,9 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-//@Getter
-//@Setter
-//@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "holidays")

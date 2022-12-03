@@ -4,7 +4,6 @@ import com.example.school.annotation.PassWordValidator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

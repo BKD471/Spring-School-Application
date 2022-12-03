@@ -1,7 +1,6 @@
 package com.example.school.validation;
 
 import com.example.school.annotation.FieldsValueMatch;
-import org.hibernate.internal.SessionFactoryRegistry;
 import org.springframework.beans.BeanWrapperImpl;
 
 import javax.validation.ConstraintValidator;
