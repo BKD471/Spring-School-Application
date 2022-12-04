@@ -16,8 +16,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @ComponentScan("com.example.school.security")// not for spring boot
 public class ProjectSecurityConfig  {
 
-    @Autowired
-    SchoolUsernamePwdAuthenticationProvider schoolUsernamePwdAuthenticationProvider;//not needed for boot
+    //@Autowired
+   // SchoolUsernamePwdAuthenticationProvider schoolUsernamePwdAuthenticationProvider;//not needed for boot
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/public/**").and()
