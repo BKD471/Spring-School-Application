@@ -23,14 +23,19 @@ public class LoginController {
                                    @RequestParam(value = "logout", required = false) String logout,
                                    @RequestParam(value="register",required = false) String register, Model model) {
         String errorMessge = null;
+        String type=null;
         if(error != null) {
             errorMessge = "Username or Password is incorrect !!";
+            type="PASSWORD";
         }else if(logout != null) {
             errorMessge = "You have been successfully logged out !!";
+            type="LOGOUT";
         }else if(register!=null){
             errorMessge="Your registration is successfull. Please login with correct credentials";
+            type="REGISTER";
         }
         model.addAttribute("errorMessge", errorMessge);
+        model.addAttribute("type",type);
         return "login.html";
     }
 

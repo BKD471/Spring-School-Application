@@ -46,7 +46,9 @@ Author URL: http://w3layouts.com
       <div class="col-md-6 login-center">
         <form action="/login" method="post" class="signin-form">
           <div class="col-md-8 login-center input-grids">
-            <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessge)}"
+            <li class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(errorMessge) && (type=='PASSWORD' || type=='LOGOUT')}"
+                th:text="${errorMessge}" />
+            <li class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(errorMessge) && type=='REGISTER'}"
                 th:text="${errorMessge}" />
             <input type="text" name="username" id="username" placeholder="Username"
                    class="login-input" />
