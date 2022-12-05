@@ -23,6 +23,8 @@ public class ProjectSecurityConfig  {
         http.csrf().ignoringAntMatchers("/saveMsg").ignoringAntMatchers("/public/**").and()
                 .authorizeRequests()
                 .mvcMatchers("/dashboard").authenticated()
+                .mvcMatchers("/displayProfile").authenticated()
+                .mvcMatchers("/updateProfile").authenticated()
                 .mvcMatchers("/displayMessages").hasRole("ADMIN")
                 .mvcMatchers("/home").permitAll()
                 .mvcMatchers("/holidays/**").permitAll()

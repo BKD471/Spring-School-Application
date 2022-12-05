@@ -18,7 +18,7 @@ public class Address extends  BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name="native",strategy = "native")
-    private String addressId;
+    private int addressId;
 
     @NotBlank(message = "Address1 must not be blank")
     @Size(min=5,message = "Address1 must be at least 5 characters long")
