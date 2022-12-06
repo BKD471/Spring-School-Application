@@ -23,7 +23,7 @@ public class ProfileController {
     @Autowired
     private PersonRepository personRepository;
     @RequestMapping("/displayProfile")
-    public ModelAndView displayMessages(Model model, HttpSession httpSession) {
+    public ModelAndView displayMessages(Model model,HttpSession httpSession) {
         Person person=(Person) httpSession.getAttribute("loggedInPerson");
         Profile profile = new Profile();
         profile.setName(person.getName());
