@@ -1,6 +1,5 @@
 package com.example.school.aspect;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -8,7 +7,6 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 import java.time.Instant;
 
@@ -16,7 +14,6 @@ import java.time.Instant;
 @Aspect
 @Component
 public class LoggerAspect {
-
     @Around("execution(* com.example.school..*.*(..))")
     public Object log(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("--------------------------------------------------------->");
@@ -30,7 +27,6 @@ public class LoggerAspect {
         log.info("------------------------------------------------------------->");
         return returnObj;
     }
-
     @AfterThrowing(value = "execution(* com.example.school..*.*(..))", throwing = "ex")
     public void logException(JoinPoint joinPoint, Exception ex) {
         log.error(joinPoint.getSignature() + " An Exception happened due to: " + ex.getMessage());

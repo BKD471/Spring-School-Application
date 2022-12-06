@@ -13,19 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-
 import javax.validation.Valid;
 import java.util.List;
-
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
 
 @Slf4j
 @Controller
 public class ContactController {
     private final ContactService contactService;
-
     @Autowired
     public ContactController(ContactService contactService){
         this.contactService=contactService;
@@ -43,7 +38,6 @@ public class ContactController {
             log.info("you have done something wrong in filling up contact form"+error.toString());
             return "contact.html";
         }
-
         contactService.saveMessageDetails(contact);
         return "redirect:/contact";
     }
@@ -62,5 +56,4 @@ public class ContactController {
         contactService.updateMsgStatus(id,authentication.getName());
         return "redirect:/displayMessages";
     }
-
 }

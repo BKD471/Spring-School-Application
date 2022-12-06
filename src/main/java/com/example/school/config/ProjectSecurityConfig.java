@@ -1,7 +1,5 @@
 package com.example.school.config;
 
-import com.example.school.security.SchoolUsernamePwdAuthenticationProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity//not needed for spring boot
 @ComponentScan("com.example.school.security")// not for spring boot
 public class ProjectSecurityConfig  {
-
     //@Autowired
    // SchoolUsernamePwdAuthenticationProvider schoolUsernamePwdAuthenticationProvider;//not needed for boot
     @Bean

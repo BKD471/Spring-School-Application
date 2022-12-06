@@ -4,7 +4,6 @@ import com.example.school.annotation.FieldsValueMatch;
 import com.example.school.annotation.PassWordValidator;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -25,7 +24,6 @@ import javax.validation.constraints.Size;
 })
 
 public class Person extends BaseEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -38,7 +36,6 @@ public class Person extends BaseEntity {
     @NotBlank(message = "Mobile number must not be blank")
     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
     private String mobileNumber;
-
 
     @NotBlank(message = "Email must not be blank")
     @Email(message = "Please Provide a valid email address")
@@ -59,11 +56,9 @@ public class Person extends BaseEntity {
     @Transient
     private String confirmPwd;
 
-
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST,targetEntity = Roles.class)
     @JoinColumn(name = "role_id",referencedColumnName = "roleId",nullable = false)
     private Roles roles;
-
 
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL,targetEntity = Address.class)
     @JoinColumn(name="address_id",referencedColumnName = "addressId",nullable = true)

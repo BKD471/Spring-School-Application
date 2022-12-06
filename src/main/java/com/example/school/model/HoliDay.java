@@ -1,14 +1,12 @@
 package com.example.school.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "holidays")
 public class HoliDay extends BaseEntity {
-
     @Id
     private String day;
     private String reason;
@@ -19,6 +17,4 @@ public class HoliDay extends BaseEntity {
     public enum Type {
         FESTIVAL, FEDERAL
     }
-
-
 }

@@ -1,9 +1,7 @@
 package com.example.school.rowmapper;
 
-
 import com.example.school.model.Contact;
 import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -21,7 +19,6 @@ public class ContactRowMapper implements RowMapper<Contact> {
         contact.setStatus(rs.getString("STATUS"));
         contact.setCreatedAt(rs.getTimestamp("CREATED_AT").toLocalDateTime());
         contact.setCreatedBy(rs.getString("CREATED_BY"));
-
         if(null!=rs.getTimestamp("UPDATED_AT")){
             contact.setUpdatedAt(rs.getTimestamp("UPDATED_AT").toLocalDateTime());
         }

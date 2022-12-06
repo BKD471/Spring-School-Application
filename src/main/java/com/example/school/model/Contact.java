@@ -2,7 +2,6 @@ package com.example.school.model;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +12,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="contact_msg")
 public class Contact extends BaseEntity{
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name="native",strategy = "native")

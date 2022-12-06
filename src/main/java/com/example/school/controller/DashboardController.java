@@ -1,8 +1,5 @@
 package com.example.school.controller;
 
-
-
-
 import com.example.school.model.Person;
 import com.example.school.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -11,14 +8,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpSession;
-
 
 @Slf4j
 @Controller
 public class DashboardController {
-
     @Autowired
     PersonRepository personRepository;
     @RequestMapping("/dashboard")
@@ -29,5 +23,4 @@ public class DashboardController {
         model.addAttribute("roles", authentication.getAuthorities().toString());
         return "dashboard.html";
     }
-
 }

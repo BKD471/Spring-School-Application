@@ -6,7 +6,6 @@ import com.example.school.repository.ContactRepositoryJPA;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -14,10 +13,8 @@ import java.util.Optional;
 @Service
 @Slf4j
 public class ContactService {
-
     @Autowired
     private ContactRepositoryJPA contactRepositoryJpa;
-
     public boolean saveMessageDetails(Contact contact){
          boolean isSaved=false;
          contact.setStatus(SchoolConstants.OPEN);

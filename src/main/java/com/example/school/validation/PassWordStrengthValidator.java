@@ -1,7 +1,6 @@
 package com.example.school.validation;
 
 import com.example.school.annotation.PassWordValidator;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Arrays;
@@ -12,12 +11,10 @@ public class PassWordStrengthValidator implements ConstraintValidator<PassWordVa
      * @param constraintAnnotation 
      */
      List<String> weakPasswords;
-
     @Override
     public void initialize(PassWordValidator constraintAnnotation) {
        weakPasswords= Arrays.asList("12345","password","qwerty");
     }
-
     /**
      * @param  passwordField
      * @param constraintValidatorContext

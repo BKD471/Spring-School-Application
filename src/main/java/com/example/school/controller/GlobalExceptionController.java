@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionController {
-
     @ExceptionHandler(Exception.class)
     public ModelAndView exceptionHandler(Exception exception){
       ModelAndView errorPage=new ModelAndView();

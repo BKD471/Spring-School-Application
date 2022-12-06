@@ -16,18 +16,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Objects;
 
 @Component
 public class SchoolUsernamePwdAuthenticationProvider implements AuthenticationProvider {
-
     @Autowired
     private PersonRepository personRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     /**
      * @param authentication
      * @return
@@ -35,7 +31,6 @@ public class SchoolUsernamePwdAuthenticationProvider implements AuthenticationPr
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
         String email = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         Person person = personRepository.readByEmail(email);
@@ -45,7 +40,6 @@ public class SchoolUsernamePwdAuthenticationProvider implements AuthenticationPr
             throw new BadCredentialsException("Invalid Credentials");
         }
     }
-
     private List<GrantedAuthority> getGrantedAuthorities(Roles roles){
         List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+roles.getRoleName()));

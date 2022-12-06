@@ -2,7 +2,6 @@ package com.example.school.model;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +13,6 @@ import javax.validation.constraints.Size;
 @Data
 @Entity
 public class Address extends  BaseEntity{
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name="native",strategy = "native")

@@ -9,18 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Objects;
 
 @Slf4j
 @Service
 public class PersonService {
-
     @Autowired
     private PersonRepository personRepository;
     @Autowired
     private RolesRepository rolesRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
     public boolean createNewPerson(Person person){
