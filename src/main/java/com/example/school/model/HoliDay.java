@@ -3,7 +3,8 @@ package com.example.school.model;
 import lombok.*;
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "holidays")
 public class HoliDay extends BaseEntity {

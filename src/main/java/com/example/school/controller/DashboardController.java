@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
+import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -19,6 +20,9 @@ public class DashboardController {
     public String displayDashboard(Model model, Authentication authentication, HttpSession httpSession) {
         Person person=personRepository.readByEmail(authentication.getName());
         httpSession.setAttribute("loggedInPerson",person);
+        if(!Objects.isNull(person.getPhoenixClass()) && person.getPhoenixClass().getName()!=null){
+            model.addAttribute("enrolledClass",person.getPhoenixClass().getName());
+        }
         model.addAttribute("username", person.getName());
         model.addAttribute("roles", authentication.getAuthorities().toString());
         return "dashboard.html";

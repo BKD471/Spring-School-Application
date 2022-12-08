@@ -1,13 +1,14 @@
 package com.example.school.controller;
 
+import com.example.school.model.Courses;
 import com.example.school.model.Person;
 import com.example.school.model.PhoenixClass;
+import com.example.school.repository.CoursesRepository;
 import com.example.school.repository.PersonRepository;
 import com.example.school.repository.PhoenixClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ public class AdminController {
     private PersonRepository personRepository;
     @Autowired
     private PhoenixClassRepository phoenixClassRepository;
+
+    @Autowired
+    private CoursesRepository coursesRepository;
 
     @RequestMapping("/displayClasses")
     public ModelAndView displayClasses(Model model) {
@@ -80,7 +84,6 @@ public class AdminController {
             modelAndView.setViewName("redirect:/admin/displayStudents?classId=" + phoenixClass.getClassId() + "&error=true");
             return modelAndView;
         }
-
         personEntity.setPhoenixClass(phoenixClass);
         personRepository.save(personEntity);
         phoenixClass.getPersons().add(personEntity);
@@ -88,16 +91,78 @@ public class AdminController {
         modelAndView.setViewName("redirect:/admin/displayStudents?classId=" + phoenixClass.getClassId());
         return modelAndView;
     }
+
     @GetMapping("/deleteStudent")
     public ModelAndView deleteStudent(Model model, @RequestParam int personId, HttpSession session) {
         PhoenixClass phoenixClass = (PhoenixClass) session.getAttribute("loggedInClass");
         Optional<Person> personEntity = personRepository.findById(personId);
         personEntity.get().setPhoenixClass(null);
         phoenixClass.getPersons().remove(personEntity.get());
-        PhoenixClass phoenixClassSaved=phoenixClassRepository.save(phoenixClass);
-       // System.exit(0);
-        session.setAttribute("loggedInClass",phoenixClassSaved);
-        ModelAndView modelAndView=new ModelAndView("redirect:/admin/displayStudents?classId=" + phoenixClass.getClassId());
+        PhoenixClass phoenixClassSaved = phoenixClassRepository.save(phoenixClass);
+        session.setAttribute("loggedInClass", phoenixClassSaved);
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayStudents?classId=" + phoenixClass.getClassId());
         return modelAndView;
     }
+
+    @GetMapping("/displayCourses")
+    public ModelAndView displayCourses(Model model) {
+        List<Courses> courses = coursesRepository.findAll();
+        ModelAndView modelAndView = new ModelAndView("courses_secure.html");
+        modelAndView.addObject("courses", courses);
+        modelAndView.addObject("course", new Courses());
+        return modelAndView;
+    }
+
+    @PostMapping("/addNewCourse")
+    public ModelAndView addNewCourse(Model model, @ModelAttribute("course") Courses course) {
+        coursesRepository.save(course);
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/displayCourses");
+        return modelAndView;
+    }
+
+    @RequestMapping("/viewStudents")
+    public ModelAndView viewStudents(Model model, @RequestParam int id, HttpSession session, @RequestParam(value = "error", required = false) String error) {
+        String errorMessage = null;
+        ModelAndView modelAndView = new ModelAndView("course_students.html");
+        Optional<Courses> courses = coursesRepository.findById(id);
+        if (error != null) {
+            errorMessage = "Invalid credentials of Students";
+            modelAndView.addObject("errorMessage", errorMessage);
+        }
+        session.setAttribute("currentCourse", courses.get());
+        modelAndView.addObject("courses", courses.get());
+        modelAndView.addObject("person", new Person());
+        return modelAndView;
+    }
+
+    @PostMapping("/addStudentToCourse")
+    public ModelAndView addStudentToCourse(Model model, @ModelAttribute("person") Person person, HttpSession session) {
+        Person personEntity = personRepository.readByEmail(person.getEmail());
+        Courses courses = (Courses) session.getAttribute("currentCourse");
+        ModelAndView modelAndView = new ModelAndView();
+        if (Objects.isNull(personEntity) || !(personEntity.getPersonId() > 0)) {
+            modelAndView.setViewName("redirect:/admin/viewStudents?id=" + courses.getCourseId() + "&error=true");
+            return modelAndView;
+        }
+        personEntity.getCourses().add(courses);
+        courses.getPersons().add(personEntity);
+        personRepository.save(personEntity);
+        session.setAttribute("currentCourse",courses);
+        modelAndView.setViewName("redirect:/admin/viewStudents?id="+courses.getCourseId());
+        return modelAndView;
+    }
+
+    @GetMapping("/deleteStudentFromCourse")
+    public ModelAndView deleteStudentFromCourse(Model model,@RequestParam int personId,HttpSession session){
+        ModelAndView modelAndView=new ModelAndView();
+        Courses courses=(Courses) session.getAttribute("currentCourse");
+        Optional<Person> personEntity=personRepository.findById(personId);
+        personEntity.get().getCourses().remove(courses);
+        courses.getPersons().remove(personEntity.get());
+        personRepository.save(personEntity.get());
+        session.setAttribute("currentCourse",courses);
+        modelAndView.setViewName("redirect:/admin/viewStudents?id="+courses.getCourseId());
+        return  modelAndView;
+    }
+
 }
