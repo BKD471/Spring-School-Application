@@ -5,6 +5,10 @@ import com.example.school.model.Contact;
 import com.example.school.repository.ContactRepositoryJPA;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
@@ -41,5 +45,13 @@ public class ContactService {
         Contact updatedContact=contactRepositoryJpa.save(fetchContact.get());
         if(!Objects.isNull(updatedContact) && !Objects.isNull(updatedContact.getUpdatedBy())) isUpdated=true;
         return isUpdated;
+    }
+
+    public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir){
+        int pageSize=5;
+        Pageable pageable= PageRequest.of(pageNum-1,pageSize,sortDir.equals("asc")? Sort.by(sortField).ascending():
+                Sort.by(sortField).descending());
+        Page<Contact> msgPage=contactRepositoryJpa.findByStatus(SchoolConstants.OPEN,pageable);
+        return  msgPage;
     }
 }
