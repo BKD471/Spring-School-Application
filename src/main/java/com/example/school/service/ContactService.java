@@ -1,6 +1,7 @@
 package com.example.school.service;
 
 import static com.example.school.constants.SchoolConstants.*;
+import java.util.List;
 import com.example.school.model.Contact;
 import com.example.school.repository.ContactRepositoryJPA;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,9 @@ public class ContactService {
          Contact savedContact=contactRepositoryJpa.save(contact);
          if(!Objects.isNull(savedContact) && savedContact.getContactId()>0) isSaved=true;
          return isSaved;
+    }
+    public List<Contact> findMsgsWithOpenStatus(String status){
+        return contactRepositoryJpa.findByStatus(status);
     }
 
     public boolean updateMsgStatus(int contactId, String updatedBy){

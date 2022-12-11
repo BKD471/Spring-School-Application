@@ -9,12 +9,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 public interface ContactRepositoryJPA extends PagingAndSortingRepository<Contact,Integer>,CrudRepository<Contact,Integer> {
+     List<Contact> findByStatus(String status);
+
      @Query("SELECT c FROM Contact c WHERE c.status=:status")
      //@Query(value="SELECT * FROM contact_msg  WHERE contact_msg.status=:status",nativeQuery = true)
      Page<Contact> findByStatus(@Param("status") String state, Pageable pageable);
