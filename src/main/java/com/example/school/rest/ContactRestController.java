@@ -6,10 +6,7 @@ import com.example.school.model.Response;
 import com.example.school.repository.ContactRepositoryJPA;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +17,8 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping(path="/api/contact")
+@RequestMapping(path="/api/contact",produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
+@CrossOrigin(origins = "*")
 public class ContactRestController {
     @Autowired
     ContactRepositoryJPA contactRepositoryJPA;
