@@ -44,7 +44,7 @@ public class ContactService {
                 Sort.by(sortField).descending());
         //Page<Contact> msgPage=contactRepositoryJpa.findOpenMsgsNative(OPEN,pageable);
         //Page<Contact> msgPage=contactRepositoryJpa.findOpenMsgs(OPEN,pageable);
-        Page<Contact> msgPage=contactRepositoryJpa.findByStatus(OPEN,pageable);
+        Page<Contact> msgPage=contactRepositoryJpa.findByStatusWithQuery(OPEN,pageable);
         return  msgPage;
     }
 }

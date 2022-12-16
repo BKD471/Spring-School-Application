@@ -18,7 +18,7 @@ public interface ContactRepositoryJPA extends PagingAndSortingRepository<Contact
 
      @Query("SELECT c FROM Contact c WHERE c.status=:status")
      //@Query(value="SELECT * FROM contact_msg  WHERE contact_msg.status=:status",nativeQuery = true)
-     Page<Contact> findByStatus(@Param("status") String state, Pageable pageable);
+     Page<Contact> findByStatusWithQuery(@Param("status") String state, Pageable pageable);
 
      @Transactional
      @Modifying

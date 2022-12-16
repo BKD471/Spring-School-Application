@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Objects;
 
 @Slf4j
-@Controller
+@Controller("profileControllerBean")
 public class ProfileController {
     @Autowired
     private PersonRepository personRepository;
