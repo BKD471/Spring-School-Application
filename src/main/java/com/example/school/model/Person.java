@@ -2,6 +2,7 @@ package com.example.school.model;
 
 import com.example.school.annotation.FieldsValueMatch;
 import com.example.school.annotation.PassWordValidator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,16 +51,19 @@ public class Person extends BaseEntity {
     @NotBlank(message = "Confirm email must not be blank")
     @Email(message = "Please Provide a valid confirm email address")
     @Transient
+    @JsonIgnore
     private String confirmEmail;
 
     @NotBlank(message = "Password must not be blank")
     @Size(min = 5, message = "Password must be at least 5 characters long")
     @PassWordValidator
+    @JsonIgnore
     private String pwd;
 
     @NotBlank(message = "Confirm password must not be blank")
     @Size(min = 5, message = "Confirm password must be at least 5 characters long")
     @Transient
+    @JsonIgnore
     private String confirmPwd;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, targetEntity = Roles.class)
