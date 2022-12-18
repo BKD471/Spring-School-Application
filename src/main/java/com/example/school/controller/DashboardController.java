@@ -25,6 +25,14 @@ public class DashboardController {
         }
         model.addAttribute("username", person.getName());
         model.addAttribute("roles", authentication.getAuthorities().toString());
+        logMessages();
         return "dashboard.html";
+    }
+
+    public void logMessages(){
+        log.info("Log Messages of Info");
+        log.error("Log Messages of error");
+        log.debug("Log Messages of debug");
+        log.trace("Log Messages of trace");
     }
 }
