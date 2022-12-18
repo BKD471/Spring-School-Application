@@ -1,6 +1,8 @@
 package com.example.school.service;
 
 import static com.example.school.constants.SchoolConstants.*;
+
+import com.example.school.config.PhoenixSchoolProps;
 import com.example.school.model.Contact;
 import com.example.school.repository.ContactRepositoryJPA;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,9 @@ import java.util.Objects;
 public class ContactService {
     @Autowired
     private ContactRepositoryJPA contactRepositoryJpa;
+
+    @Autowired
+    PhoenixSchoolProps phoenixSchoolProps;
     public boolean saveMessageDetails(Contact contact){
          boolean isSaved=false;
          contact.setStatus(OPEN);
@@ -39,7 +44,12 @@ public class ContactService {
     }
 
     public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir){
-        int pageSize=5;
+        int pageSize= phoenixSchoolProps.getPageSize();
+
+        if(!Objects.isNull(phoenixSchoolProps.getContact()) && !Objects.isNull(phoenixSchoolProps.getContact().get("pageSize"))) {
+             pageSize=Integer.parseInt(phoenixSchoolProps.getContact().get("pageSize").trim());
+        }
+
         Pageable pageable= PageRequest.of(pageNum-1,pageSize,sortDir.equals("asc")? Sort.by(sortField).ascending():
                 Sort.by(sortField).descending());
         //Page<Contact> msgPage=contactRepositoryJpa.findOpenMsgsNative(OPEN,pageable);
