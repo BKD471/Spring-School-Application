@@ -20,8 +20,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-@Profile("prod")
-public class SchoolUsernamePwdAuthenticationProvider implements AuthenticationProvider {
+@Profile("!prod")
+public class SchoolUsernameNonProdPwdAuthenticationProvider implements AuthenticationProvider {
+
     @Autowired
     private PersonRepository personRepository;
     @Autowired
@@ -36,7 +37,7 @@ public class SchoolUsernamePwdAuthenticationProvider implements AuthenticationPr
         String email = authentication.getName();
         String pwd = authentication.getCredentials().toString();
         Person person = personRepository.readByEmail(email);
-        if (!Objects.isNull(person) && person.getPersonId() > 0 && passwordEncoder.matches(pwd, person.getPwd())) {
+        if (!Objects.isNull(person) && person.getPersonId() > 0) {
             return new UsernamePasswordAuthenticationToken(email, null, getGrantedAuthorities(person.getRoles()));
         } else {
             throw new BadCredentialsException("Invalid Credentials");
@@ -45,7 +46,7 @@ public class SchoolUsernamePwdAuthenticationProvider implements AuthenticationPr
     private List<GrantedAuthority> getGrantedAuthorities(Roles roles){
         List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+roles.getRoleName()));
-     return grantedAuthorities;
+        return grantedAuthorities;
     }
     /**
      * @param authentication
