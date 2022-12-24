@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "1030bcb4-3efa-4a37-91e5-2b16b889a46e",
+		"name": "School Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20164766"
+	},
+	"item": [
+		{
+			"name": "Get Contact Messages By Status",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin@eazyschool.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/contact/getMessagesByStatus?status=Open",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"contact",
+						"getMessagesByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "Open"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Msgs by Status1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin@eazyschool.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\":\"Close\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/contact/getAllMsgsByStatus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"contact",
+						"getAllMsgsByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "Open",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveMessage",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin@eazyschool.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "invocationFrom",
+						"value": "mobile",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"status\": \"Open\",\n        \"name\": \"Phoenix Das\",\n        \"subject\": \"React\",\n        \"mobileNum\": \"142689\",       \n        \"message\": \"I will be the best React developer in the town\",\n        \"email\": \"phoenix@aot.edu.in\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/contact/saveMsg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"contact",
+						"saveMsg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Message",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin@eazyschool.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contactId\":2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/contact/deleteMsg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"contact",
+						"deleteMsg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Close Messages",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"contactId\":3\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/contact/closeMsg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"contact",
+						"closeMsg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consuming Get Contact msg Rest Services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/getMessages?status=Open",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getMessages"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "Open"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consuming Save Message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Open\",\n    \"name\": \"Lionel Messi\",\n    \"subject\": \"Spring boot Microservices\",\n    \"mobileNum\": \"1234567892\",       \n    \"message\": \"I will be the best Spring Boot Microservices developer in the town\",\n    \"email\": \"Messi@aot.edu.in\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/saveMsg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"saveMsg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consuming Save Message WebClient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Open\",\n    \"name\": \"Christiano Ronaldo\",\n    \"subject\": \"Aws Developer Associate\",\n    \"mobileNum\": \"3456789122\",       \n    \"message\": \"I will be the best AWS developer in the town\",\n    \"email\": \"Ronaldo@aot.edu.in\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/saveMessage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"saveMessage"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
